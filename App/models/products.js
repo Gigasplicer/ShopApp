@@ -6,8 +6,6 @@ class Product{
         this.imageUrl = imageUrl;
         this.description = description;
         this.price = price;
-
-
-
-    }
 }
+}
+export default Product;
