@@ -21,8 +21,9 @@ const ProductsOverviewScreen = props => { //this is referred to as a component. 
                     image={itemData.item.imageUrl}
                     title={itemData.item.title}
                     price={itemData.item.price}
-                    onViewDetail={() => {
-                        props.navigation.navigate({routeName: "ProductDetails"})
+                    onViewDetail={() => {//On view detail button pressed.  Will navigate to details screen and pass the id of the product selected.
+                        props.navigation.navigate("ProductDetails", {productId: itemData.item.id, productTitle: itemData.item.title})//props.navigation.navigate gives us access to the stack that we created in the shopNavigator
+
                      }}
                     onAddToCart={() => { }}
                 />
