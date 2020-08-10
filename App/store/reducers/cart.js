@@ -2,13 +2,13 @@ import { ADD_TO_CART } from "../actions/cart";
 import CartItem from '../../models/cart-item';
 
 
-const initialState ={
-    items: {},//javascript object
+const initialState = {
+    items: {},//javascript object make a class in models
     totalAmount: 0,
 };
 
-export default ( state = initialState, action) => {
-    switch(action.type){
+export default (state = initialState, action) => {
+    switch (action.type) {
         case ADD_TO_CART:
             const addedProduct = action.product;
             const prodPrice = addedProduct.price;
@@ -22,14 +22,20 @@ export default ( state = initialState, action) => {
                     prodTitle,
                     state.items[addedProduct.id].sum + prodPrice
                 );
-            }else{
+                return {
+                    ...state,
+                    items: { ...state.items, [addedProduct.id]: updatedCartItem },
+                    totalAmount: state.totalAmount + prodPrice
+                }
+            } else {
                 const newCartItem = new CartItem(1, prodPrice, prodTitle, prodPrice);
-                return{
-                    ...state, 
-                    items: {...state.items, [addedProduct.id]: newCartItem}//[] used for accessing a dynamic property
+                return {
+                    ...state,
+                    items: { ...state.items, [addedProduct.id]: newCartItem },//[] used for accessing a dynamic property
+                    totalAmount: state.totalAmount + prodPrice
                 };
             }
-            
+
     }
     return state;
 };

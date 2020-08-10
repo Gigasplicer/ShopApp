@@ -1,14 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button, ScrollView, Image } from 'react-native';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Product from '../../models/products';
-import Colors from '../../constants/colors'
+import Colors from '../../constants/colors';
+import * as cartActions from '../../store/actions/cart';
 
 const ProductDetailScreen = props => {
 
     const productId = props.navigation.getParam('productId');  //props.navigation is accessable from any screen that is navigated to through the stack navigator.  This is an best way to pass data.
-
-    //useSelector acts on a state.  useSelector(state => state.(named value set in rootreducer).(named vale set in reducers folder))
+    const dispatch = useDispatch();
+    //useSelector acts on a state.  useSelector(state => state.(named value set in rootreducer).(named value set in reducers folder))
     const selectedProduct = useSelector(state => state.products.availableProducts.find(prod => prod.id === productId))
 
     return (
@@ -16,7 +17,9 @@ const ProductDetailScreen = props => {
         <ScrollView>
             <Image style={styles.image} source={{ uri: selectedProduct.imageUrl }} />
             <View style={styles.actionButtons}>
-                <Button color={Colors.primary} title="Add to Cart" onPress={() => { }} />
+                <Button color={Colors.primary} title="Add to Cart" onPress={() => { 
+                    dispatch(cartActions.addToCart(selectedProduct));
+                }} />
             </View>
             <Text style={styles.price}>${selectedProduct.price.toFixed(2)}</Text>
             <Text style={styles.description}>{selectedProduct.description}</Text>

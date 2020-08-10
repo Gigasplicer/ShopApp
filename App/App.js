@@ -6,9 +6,11 @@ import { Provider } from 'react-redux';// used to wrap around the main function/
 import productsReducer from './store/reducers/products';
 import ShopNavigator from './navigation/ShopNavigator';
 import * as Font from 'expo-font'; // npm install --save expo-font
+import cartReducer from './store/reducers/cart';
 
 const rootReducer = combineReducers({
   products: productsReducer,
+  cart: cartReducer,
 });
 
 
