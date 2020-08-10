@@ -31,6 +31,7 @@ const ProductsOverviewScreen = props => { //this is referred to as a component. 
                      }}
                     onAddToCart={() => {
                         dispatch(cartActions.addToCart(itemData.item));
+                        
                      }}
                 />
             )}
@@ -44,14 +45,17 @@ const styles = StyleSheet.create({
 
 });
 //NavigationOption updates need to be rebuilt on the emulator to work.  Reload to see updates.
-ProductsOverviewScreen.navigationOptions = {
+ProductsOverviewScreen.navigationOptions = navData => {
+    return{
     headerTitle: 'All Products',
     headerRight: () => <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item title='Cart' iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'} 
-        onPress={()=>{}}
+        onPress={()=>{
+            navData.navigation.navigate('Cart')
+        }}
         />
 
     </HeaderButtons>
-}
+}}
 
 export default ProductsOverviewScreen;

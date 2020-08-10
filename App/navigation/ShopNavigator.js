@@ -4,13 +4,14 @@ import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
 import Colors from '../constants/colors'
 import { createAppContainer } from 'react-navigation';
-
+import CartScreen from '../screens/shop/CartScreen'
 
 
 //{} means its a javascript object.
 const ProductsNavigator = createStackNavigator({
     ProductsOverview: ProductsOverviewScreen,
     ProductDetails: ProductDetailScreen,
+    Cart: CartScreen,
 }, {
     defaultNavigationOptions: {
         headerStyle: {
