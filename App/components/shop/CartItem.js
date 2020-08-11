@@ -11,7 +11,7 @@ const CartItem = props => {
                 <Text style={styles.quantity}>QTY: {props.quantity}</Text><Text style={styles.title}>  {props.title}</Text>
             </Text>
             <View style={styles.itemData}>
-                <Text style={styles.title}>${props.price}</Text>
+                <Text style={styles.title}>${props.sum}</Text>
                 <TouchableNativeFeedback onPress={props.onRemove} style={styles.deleteButton}>
                     <Ionicons name='md-trash'
                         size={23}
