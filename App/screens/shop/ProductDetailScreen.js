@@ -6,7 +6,7 @@ import Colors from '../../constants/colors';
 import * as cartActions from '../../store/actions/cart';
 
 const ProductDetailScreen = props => {
-
+    console.log('test')
     const productId = props.navigation.getParam('productId');  //props.navigation is accessable from any screen that is navigated to through the stack navigator.  This is an best way to pass data.
     const dispatch = useDispatch();
     //useSelector acts on a state.  useSelector(state => state.(named value set in rootreducer).(named value set in reducers folder))

@@ -10,6 +10,7 @@ import HeaderButton from '../../components/UI/HeaderButton';
 const ProductsOverviewScreen = props => { //this is referred to as a component.  You can have more than one per js file, but data delt with inside is not immediately available outside of it.
     const products = useSelector(state => state.products.availableProducts); //grab products and store them in products. state is arbituary. ie. how useSelector works
     const dispatch = useDispatch();
+    
     //takes a function.  takes the redux state, and returns what we point to.  In this case it grabs 'products' from the root reducer found in App.js. 
     //Which in turn points to /reducers/products and 'availableProducts' this name needs to be correct. use select returns the value to the right of =>
     return (
