@@ -44,6 +44,7 @@ const dispatch = useDispatch();
                             title={itemData.item.productTitle}
                             sum={itemData.item.sum.toFixed(2)}
                             quantity={itemData.item.quantity}
+                            deletable
                             onRemove={() => {
                                 dispatch(cartActions.removeFromCart(itemData.item.productId));
                              }}

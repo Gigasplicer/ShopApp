@@ -12,12 +12,14 @@ const CartItem = props => {
             </Text>
             <View style={styles.itemData}>
                 <Text style={styles.title}>${props.sum}</Text>
+                {props.deletable && (// makes touchable a true false statement that is always true.  meaning you can hide the data if you dont want it visible.
                 <TouchableNativeFeedback onPress={props.onRemove} style={styles.deleteButton}>
                     <Ionicons name='md-trash'
                         size={23}
                         color='red'
                     />
                 </TouchableNativeFeedback>
+                )}
             </View>
 
         </View>
