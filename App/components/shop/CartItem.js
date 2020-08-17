@@ -11,14 +11,14 @@ const CartItem = props => {
                 <Text style={styles.quantity}>QTY: {props.quantity}</Text><Text style={styles.title}>  {props.title}</Text>
             </Text>
             <View style={styles.itemData}>
-                <Text style={styles.title}>${props.sum}</Text>
+                <Text style={styles.price}>${props.sum}</Text>
                 {props.deletable && (// makes touchable a true false statement that is always true.  meaning you can hide the data if you dont want it visible.
-                <TouchableNativeFeedback onPress={props.onRemove} style={styles.deleteButton}>
-                    <Ionicons name='md-trash'
-                        size={23}
-                        color='red'
-                    />
-                </TouchableNativeFeedback>
+                    <TouchableNativeFeedback onPress={props.onRemove} style={styles.deleteButton}>
+                        <Ionicons name='md-trash'
+                            size={23}
+                            color='red'
+                        />
+                    </TouchableNativeFeedback>
                 )}
             </View>
 
@@ -28,11 +28,12 @@ const CartItem = props => {
 
 const styles = StyleSheet.create({
     cart: {
+        width: '90%',
         padding: 10,
         backgroundColor: 'white',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginHorizontal: 20,
+        marginHorizontal: 10,
     },
     itemData: {
         flexDirection: 'row',
@@ -42,16 +43,22 @@ const styles = StyleSheet.create({
     quantity: {
         fontFamily: 'open-sans',
         color: '#888',
-        fontSize: 16,
+        fontSize: 14,
     },
     title: {
-        fontSize: 16,
+        fontSize: 12,
+        width: '50%',
         fontFamily: 'open-sans-bold',
     },
 
     deleteButton: {
         marginLeft: 20,
 
+    },
+    price: {
+        justifyContent: 'flex-end',
+        fontSize: 18,
+        fontFamily: 'open-sans-bold',
     },
 })
 

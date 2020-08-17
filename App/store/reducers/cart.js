@@ -1,6 +1,7 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/cart";
 import CartItem from '../../models/cart-item';
-import {ADD_ORDER} from '../actions/orders';
+import { ADD_ORDER } from '../actions/orders';
+import { DELETE_PRODUCT } from "../actions/products";
 
 const initialState = {
     items: {},//javascript object make a class in models
@@ -36,16 +37,16 @@ export default (state = initialState, action) => {
                 };
             };
         case REMOVE_FROM_CART:
-            
+
             const selectedItem = state.items[action.pid]
             const currentQty = selectedItem.quantity;
             let updatedCartItems;
 
             if (currentQty > 1) {
                 const updatedCartItem = new CartItem(
-                    selectedItem.quantity - 1, 
-                    selectedItem.productPrice, 
-                    selectedItem.productTitle, 
+                    selectedItem.quantity - 1,
+                    selectedItem.productPrice,
+                    selectedItem.productTitle,
                     selectedItem.sum - selectedItem.productPrice)
                 updatedCartItems = { ...state.items, [action.pid]: updatedCartItem }
             } else {
@@ -57,8 +58,21 @@ export default (state = initialState, action) => {
                 items: updatedCartItems,
                 totalAmount: state.totalAmount - selectedItem.productPrice
             }
-            case ADD_ORDER:
-                return initialState
+        case ADD_ORDER:
+            return initialState;
+            
+        case DELETE_PRODUCT:
+            if (!state.items[action.pid]) {
+                return state;
+            }
+            const updatedItems = { ...state.items };
+            const itemTotal = state.items[action.pid].sum
+            delete updatedItems[action.pid]; //actions get passed things.  check with reducer.. the specific item id is passed in this example.
+            return {
+                ...state,
+                items: updatedItems,
+                totalAmount: state.totalAmount - itemTotal
+            }
     }
     return state;
 };

@@ -1,16 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, Platform } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Platform, Button } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductItem from '../../components/shop/ProductItem';
 import * as cartActions from '../../store/actions/cart';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/UI/HeaderButton';
+import Colors from '../../constants/colors'
 
 
 const ProductsOverviewScreen = props => { //this is referred to as a component.  You can have more than one per js file, but data delt with inside is not immediately available outside of it.
     const products = useSelector(state => state.products.availableProducts); //grab products and store them in products. state is arbituary. ie. how useSelector works
     const dispatch = useDispatch();
-    
+    const selectItemHandler = (id, title) => {
+        props.navigation.navigate("ProductDetails", { productId: id, productTitle: title })
+        //On view detail button pressed.  Will navigate to details screen and pass the id of the product selected.
+        //props.navigation.navigate gives us access to the stack that we created in the shopNavigato
+    }
+
     //takes a function.  takes the redux state, and returns what we point to.  In this case it grabs 'products' from the root reducer found in App.js. 
     //Which in turn points to /reducers/products and 'availableProducts' this name needs to be correct. use select returns the value to the right of =>
     return (
@@ -26,15 +32,19 @@ const ProductsOverviewScreen = props => { //this is referred to as a component. 
                     image={itemData.item.imageUrl}
                     title={itemData.item.title}
                     price={itemData.item.price}
-                    onViewDetail={() => {//On view detail button pressed.  Will navigate to details screen and pass the id of the product selected.
-                        props.navigation.navigate("ProductDetails", { productId: itemData.item.id, productTitle: itemData.item.title })//props.navigation.navigate gives us access to the stack that we created in the shopNavigator
-
+                    onSelect={() => {
+                        selectItemHandler(itemData.item.id, itemData.item.title)
                     }}
-                    onAddToCart={() => {
-                        dispatch(cartActions.addToCart(itemData.item));
 
-                    }}
-                />
+                >
+                    <Button color={Colors.primary} title="View Details" onPress={() => {
+                        selectItemHandler(itemData.item.id, itemData.item.title)
+                    }} />
+                    <Button color={Colors.primary} title="To Cart" onPress={() => {
+                        dispatch(cartActions.addToCart(itemData.item))
+                    }} />
+
+                </ProductItem>
             )}
         //need image, title, price, and event handler?  this might be handled in productItem.js
         />

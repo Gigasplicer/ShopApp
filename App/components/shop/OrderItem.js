@@ -27,9 +27,8 @@ const OrderItem = props => {
                         <CartItem
                             key={cartItem.productId}
                             quantity={cartItem.quantity}
-                            
                             title={cartItem.productTitle}
-                            amount={cartItem.sum}
+                            sum={cartItem.sum}
                         />
                     ))}
                 </View>
@@ -59,11 +58,11 @@ const styles = StyleSheet.create({
     },
     totalAmount: {
         fontFamily: 'open-sans-bold',
-        fontSize: 18,
+        fontSize: 14,
     },
     date: {
         fontFamily: 'open-sans-bold',
-        fontSize: 12,
+        fontSize: 10,
         color: '#888',
     },
     details:{
