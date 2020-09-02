@@ -1,5 +1,5 @@
 import PRODUCTS from '../../data/dummy-data'
-import { DELETE_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT } from '../actions/products';
+import { DELETE_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT, SET_PRODUCTS } from '../actions/products';
 import Product from '../../models/products';
 
 const initialState = {
@@ -8,9 +8,20 @@ const initialState = {
 }
 export default (state = initialState, action) => {
     switch (action.type) {
+
+        case SET_PRODUCTS:
+            console.log(action.products[4].lightBars)
+            return{
+                //availableProducts: action.products,
+                //userProducts: action.products.filter(prod => prod.ownerId === 'u1')
+                
+                availableProducts: PRODUCTS, //all the products will be visible when the app starts
+                userProducts: PRODUCTS.filter(prod => prod.ownerId === 'u1')
+            }
+
         case CREATE_PRODUCT:
             const newProduct = new Product(
-                new Date().toString(),
+                action.productData.id, //id now matches the unique name created by the database
                 'u1',
                 action.productData.title,
                 action.productData.imageUrl,

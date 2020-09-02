@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image, StyleSheet, Button, TouchableNativeFeedback, Platform, TouchableOpacity } from 'react-native'
+import { Text, View, ImageBackground, StyleSheet, Button, TouchableNativeFeedback, Platform, TouchableOpacity } from 'react-native'
 
 
 
@@ -19,20 +19,20 @@ const ProductItem = props => {
         <View style={styles.product}>
             <View style={styles.touchame}>
                 <TouchMe onPress={props.onSelect} useForeground>
-                    <View>
                         <View style={styles.container}>
-                            <Image style={styles.image} source={{ uri: props.image }} />
+                            <ImageBackground style={styles.image} source={{ uri: props.image}}>
+                            <View style={styles.details}>
+                            <Text style={styles.title}> {props.title} Lights: {props.price} </Text>
                         </View>
-                        <View style={styles.details}>
-                            <Text style={styles.title}>{props.title}</Text>
-                            <Text style={styles.price}>${props.price}</Text>
+                                </ImageBackground>
                         </View>
+                        
+                </TouchMe>
 
                         <View style={styles.action}>
                             {props.children}
                         </View>
-                    </View>
-                </TouchMe>
+
             </View>
         </View>
     );
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 }, //apple
         shadowRadius: 8, //apple
         backgroundColor: 'white',
-        height: 300,
+        height: 250,
         margin: 20,
 
 
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     },
     container: {
         width: '100%',
-        height: '60%',
+        height: '80%',
         borderTopRightRadius: 10,
         borderTopLeftRadius: 10,
         overflow: 'hidden',
@@ -71,27 +71,32 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     title: {
+        color: 'white',
+        backgroundColor:'rgba(0,0,0,.25)',
+        borderRadius: 5,
         fontSize: 18,
         marginVertical: 4,
         fontFamily: 'open-sans-bold'
     },
     price: {
         fontSize: 14,
-        color: '#444',
+        backgroundColor:'rgba(0,0,0,.25)',
+        color: 'white',
         fontFamily: 'open-sans-bold'
     },
     action: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: '30%',
+        height: '10%',
         paddingHorizontal: 20,
+        paddingTop: 20,
 
     },
     details: {
         alignItems: 'center',
-        height: '10%',
-        padding: 10,
+        height: '5%',
+        padding: 5,
     }
 });
 

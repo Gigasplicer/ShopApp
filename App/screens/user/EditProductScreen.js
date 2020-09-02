@@ -30,6 +30,7 @@ const EditProductScreen = props => {
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState(editedProduct ? editedProduct.description : '');
     const [titleIsValid, setTitleIsValid] = useState(title.length);
+    const[lightBars, setLightBars] = useState([0,0,0,0,0,0,0,0,0,0])
 
 
     const submitHandler = useCallback(() => {//ensures that the function isnt recreated every time the component rerenders... that would cause an infinite loop.
@@ -43,7 +44,7 @@ const EditProductScreen = props => {
             dispatch(productsActions.createProduct(title, description, imageUrl, +price))
         }
         props.navigation.goBack();
-    }, [dispatch, ProdId, title, description, price, imageUrl, titleIsValid]);//this has no dependancies, so it will never rerun/infinite loop
+    }, [dispatch, ProdId, title, description, price, imageUrl, titleIsValid]);
 
     useEffect(() => {
         props.navigation.setParams({ submit: submitHandler })  //'submit' is now a parameter that we can retrieve in our navigation options
@@ -81,7 +82,7 @@ const EditProductScreen = props => {
 
                 {editedProduct ? null : (
                     <View style={styles.formControl}>
-                        <Text style={styles.label}> Price </Text>
+                        <Text style={styles.label}> Lights </Text>
                         <TextInput style={styles.input} value={price}
                             onChangeText={text => setPrice(text)}
                             keyboardType='number-pad'

@@ -35,7 +35,7 @@ const ProductsNavigator = createStackNavigator({
     navigationOptions: {
         drawerIcon: drawerConfig => (
             <Ionicons
-                name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                name={Platform.OS === 'android' ? 'md-list' : 'ios-list'}
                 size={23}
                 color={drawerConfig.tintColor}
             />
@@ -76,8 +76,8 @@ const AdminNavigator = createStackNavigator({
 });
 
 const ShopNavigator = createDrawerNavigator({
-    Products: ProductsNavigator,
-    Orders: OrdersNavigator,
+    Location: ProductsNavigator,
+    //Orders: OrdersNavigator,
     Admin: AdminNavigator,
 
 }, {
